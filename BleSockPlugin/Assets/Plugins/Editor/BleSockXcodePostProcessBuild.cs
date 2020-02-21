@@ -38,6 +38,7 @@ public static class BleSockXcodePostProcessBuild
         plist.ReadFromFile(plistPath);
 
         plist.root.SetString("NSBluetoothPeripheralUsageDescription", "To ad-hoc communicating");
+        plist.root.SetString("NSBluetoothAlwaysUsageDescription", "To ad-hoc communicating");
 
         var backgroundModes = plist.root.CreateArray("UIBackgroundModes");
         backgroundModes.AddString("bluetooth-central");
