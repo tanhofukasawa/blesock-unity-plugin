@@ -464,6 +464,10 @@ public class PeripheralImpl: NSObject, CBPeripheralManagerDelegate {
                             index += 1
                         }
                     }
+                    else {
+                            
+                            index += 1
+                    }
                 }
 
                 if (to & 1) != 0 {
