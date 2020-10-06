@@ -98,6 +98,7 @@ public class ChatTest : MonoBehaviour
                 advertiseButton.interactable = true;
                 sendInputField.interactable = true;
                 advertiseButton.onClick.Invoke();
+                stopButton.GetComponent<Selectable>().Select();
             };
 
             host.onBluetoothRequire += () =>
@@ -157,6 +158,7 @@ public class ChatTest : MonoBehaviour
             advertiseButton.interactable = false;
             stopButton.interactable = true;
             hostName.text = playerNameInputField.text;
+            stopButton.GetComponent<Selectable>().Select();
         });
 
         stopButton.onClick.AddListener(() =>
@@ -166,6 +168,7 @@ public class ChatTest : MonoBehaviour
             Log("アドバタイズを停止しました");
             advertiseButton.interactable = true;
             stopButton.interactable = false;
+            advertiseButton.GetComponent<Selectable>().Select();
         });
 
         // Guest
