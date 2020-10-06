@@ -18,6 +18,10 @@ public class StartController : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        PermissionHelper.CheckPermission("android.permission.ACCESS_FINE_LOCATION");
+#endif
+
         foreach (var info in buttonInfos)
         {
             info.button.onClick.AddListener(() =>
@@ -25,5 +29,7 @@ public class StartController : MonoBehaviour
                 SceneManager.LoadScene(info.sceneName);
             });
         }
+
+        buttonInfos[0].button.GetComponent<Selectable>().Select();
     }
 }

@@ -58,6 +58,7 @@ namespace BleSock
 
         public abstract bool IsBluetoothEnabled { get; }
 
+
         public abstract int LocalPlayerId { get; }
 
         // Methods

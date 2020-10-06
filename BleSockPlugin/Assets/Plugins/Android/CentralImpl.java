@@ -271,6 +271,7 @@ public final class CentralImpl {
         ScanFilter filter = new ScanFilter.Builder().setServiceUuid(uuid).build();
         ArrayList<ScanFilter> filters = new ArrayList<ScanFilter>(Arrays.asList(filter));
         ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_BALANCED).build();
+        //ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
         mScanner.startScan(filters, settings, mScanCallback);
 
         return true;

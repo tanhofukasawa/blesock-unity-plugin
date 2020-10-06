@@ -767,10 +767,10 @@ public final class PeripheralImpl {
         mOriginalAdapterName = adapter.getName();
         Utils.info("original adapter name: %s", mOriginalAdapterName);
 
-        if (!adapter.setName(mDeviceName)) {
-            Utils.error("failed to change adapter name: %s", mDeviceName);
-            return false;
-        }
+        //if (!adapter.setName(mDeviceName)) {
+        //    Utils.error("failed to change adapter name: %s", mDeviceName);
+        //    return false;
+        //}
 
         mAdvertiser = adapter.getBluetoothLeAdvertiser();
         if (mAdvertiser == null) {
@@ -780,8 +780,11 @@ public final class PeripheralImpl {
 
         Utils.info("startAdvertising");
         AdvertiseSettings settings = new AdvertiseSettings.Builder().
-                setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_BALANCED).
+                //setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_BALANCED).
+                //setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH).
+                setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY).
                 setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_MEDIUM).
+                //setTimeout(20000).
                 setConnectable(true).build();
         ParcelUuid uuid = new ParcelUuid(mServiceUUID);
         AdvertiseData data = new AdvertiseData.Builder().addServiceUuid(uuid).build();

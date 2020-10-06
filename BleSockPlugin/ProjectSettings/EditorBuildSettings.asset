@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Demos/ChatTest/ChatTest.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Demos/GameTest/GameTest.unity
     guid: 54ec2afd473f4c245ac940c7cd2d8271
-  - enabled: 1
+  - enabled: 0
     path: Assets/Demos/SpeedTest/SpeedTest.unity
     guid: 5e53b148b1985a84dbae1d8515b87bfb
   m_configObjects: {}

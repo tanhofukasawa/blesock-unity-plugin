@@ -35,6 +35,14 @@ namespace BleSock
             }
         }
 
+        public virtual bool IsPeripheralEnabled
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         // Methods
 
         public virtual bool Initialize(string serviceUUID, string uploadUUID, string downloadUUID)
@@ -193,7 +201,7 @@ namespace BleSock
         }
     }
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID 
 
     internal class Peripheral : PeripheralBase
     {
