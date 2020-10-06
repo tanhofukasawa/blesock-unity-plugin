@@ -26,6 +26,9 @@ public class ChatTest : MonoBehaviour
     public InputField sendInputField;
     public Button backButton;
 
+    [SerializeField] private Text hostName;
+    [SerializeField] private Text userName;
+
 
     private const string PROTOCOL_IDENTIFIER = "BleChatTest";
 
@@ -51,7 +54,7 @@ public class ChatTest : MonoBehaviour
 
     private void Start()
     {
-        playerNameInputField.text = "Player" + UnityEngine.Random.Range(1000,9999);
+        playerNameInputField.text = "User_" + UnityEngine.Random.Range(100,9999);
 
         modeSelectObject.SetActive(true);
 
@@ -153,6 +156,7 @@ public class ChatTest : MonoBehaviour
             Log("リモコンの接続を待っています..");
             advertiseButton.interactable = false;
             stopButton.interactable = true;
+            hostName.text = playerNameInputField.text;
         });
 
         stopButton.onClick.AddListener(() =>
@@ -180,6 +184,8 @@ public class ChatTest : MonoBehaviour
             disconnectButton.interactable = false;
 
             backButton.interactable = true;
+
+            userName.text = playerNameInputField.text;
 
             var guest = new BleSock.GuestPeer();
 
