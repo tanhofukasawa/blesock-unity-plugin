@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,8 +26,11 @@ public class ChatTest : MonoBehaviour
     public InputField sendInputField;
     public Button backButton;
 
+    [SerializeField] private Text hostName;
+    [SerializeField] private Text userName;
 
-    private const string PROTOCOL_IDENTIFIER = "ChatTest";
+
+    private const string PROTOCOL_IDENTIFIER = "BleChatTest";
 
 
     private class DeviceOptionData : Dropdown.OptionData
@@ -46,9 +48,14 @@ public class ChatTest : MonoBehaviour
     private BleSock.PeerBase mPeer;
     private List<string> mLogs = new List<string>();
 
+    private void OnEnable()
+    {
+    }
 
     private void Start()
     {
+        playerNameInputField.text = "User_" + UnityEngine.Random.Range(100,9999);
+
         modeSelectObject.SetActive(true);
 
         playerNameInputField.onEndEdit.AddListener((name) =>
@@ -62,15 +69,24 @@ public class ChatTest : MonoBehaviour
 
         hostObject.SetActive(false);
 
-        hostButton.interactable = false;
+        //hostButton.interactable = false;
+        hostButton.GetComponent<Selectable>().Select();
         hostButton.onClick.AddListener(() =>
         {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            if (!BleSock.AndroidUtils.IsPeripheralAvailable)
+            {
+                Log("このハードウェアはBluetooth LEの機能が不足しています");
+                return;
+            }
+#endif
             modeSelectObject.SetActive(false);
             hostObject.SetActive(true);
             chatObject.SetActive(true);
 
             advertiseButton.interactable = false;
             stopButton.interactable = false;
+
 
             backButton.interactable = true;
 
@@ -81,6 +97,7 @@ public class ChatTest : MonoBehaviour
                 Log("初期化が完了しました");
                 advertiseButton.interactable = true;
                 sendInputField.interactable = true;
+                advertiseButton.onClick.Invoke();
             };
 
             host.onBluetoothRequire += () =>
@@ -136,9 +153,10 @@ public class ChatTest : MonoBehaviour
                 return;
             }
 
-            Log("アドバタイズしています..");
+            Log("リモコンの接続を待っています..");
             advertiseButton.interactable = false;
             stopButton.interactable = true;
+            hostName.text = playerNameInputField.text;
         });
 
         stopButton.onClick.AddListener(() =>
@@ -154,7 +172,7 @@ public class ChatTest : MonoBehaviour
 
         guestObject.SetActive(false);
 
-        joinButton.interactable = false;
+        //joinButton.interactable = false;
         joinButton.onClick.AddListener(() =>
         {
             modeSelectObject.SetActive(false);
@@ -166,6 +184,8 @@ public class ChatTest : MonoBehaviour
             disconnectButton.interactable = false;
 
             backButton.interactable = true;
+
+            userName.text = playerNameInputField.text;
 
             var guest = new BleSock.GuestPeer();
 
@@ -323,6 +343,7 @@ public class ChatTest : MonoBehaviour
             hostObject.SetActive(false);
             guestObject.SetActive(false);
             chatObject.SetActive(false);
+            hostButton.GetComponent<Selectable>().Select();
         });
     }
 

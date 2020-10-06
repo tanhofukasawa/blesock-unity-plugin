@@ -2,7 +2,6 @@ package xflag.plugins.bleSock;
 
 import android.bluetooth.BluetoothAdapter;
 import android.util.Log;
-
 import java.util.Locale;
 
 public final class Utils {
@@ -25,6 +24,15 @@ public final class Utils {
         }
 
         return adapter.isMultipleAdvertisementSupported();
+    }
+
+    public static String GetBluetoothDeviceName()
+    {
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter == null) {
+            return "";
+        }
+        return adapter.getName();
     }
 
     public static void info(String format, Object... args) {

@@ -4,8 +4,7 @@
 		android:theme="@style/UnityThemeSelector"
 		android:icon="@mipmap/app_icon"
 		android:label="@string/app_name"
-		android:isGame="true"
-		android:banner="@drawable/app_banner">
+		android:isGame="true">
 		<activity
 			android:name="com.unity3d.player.UnityPlayerActivity"
 			android:label="@string/app_name"
@@ -17,15 +16,17 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 				<category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.INFO"/>
 			</intent-filter>
 			<meta-data android:name="unityplayer.UnityActivity" android:value="true" />
 		</activity>
+        <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="true" />
 	</application>
 
 	<uses-permission android:name="android.permission.BLUETOOTH" />
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+<!--	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
 
 	<uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 </manifest>

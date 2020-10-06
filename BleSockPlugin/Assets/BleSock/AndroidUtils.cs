@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BleSock
 {
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
 
     internal static class AndroidUtils
     {
